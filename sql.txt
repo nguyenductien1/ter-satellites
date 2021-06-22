@@ -1,0 +1,77 @@
+//Create table to store username and password of external user
+CREATE SEQUENCE user_ext_sq;
+CREATE TABLE public.user_ext
+(
+    id int4 NOT NULL DEFAULT nextval('user_ext_sq'::regclass),
+    user_name character(50) NOT NULL,
+    pass_word character(100) NOT NULL,
+    CONSTRAINT pk_id_user PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.user_ext
+    OWNER to dtn;
+
+//Create Table user_file to store information about file of user(store in our database) 
+CREATE SEQUENCE user_file_sq;
+CREATE TABLE public.user_file
+(
+    id_file int4 NOT NULL DEFAULT nextval('user_file_sq'::regclass),
+    id_user int4 NOT NULL,
+    link_file "char" NOT NULL,
+    date_created date NOT NULL,
+    CONSTRAINT pk_file PRIMARY KEY (id_file)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.user_file
+    OWNER to dtn;
+
+
+ALTER TABLE public.user_file
+    ADD CONSTRAINT fk_user_file FOREIGN KEY (id_user)
+    REFERENCES public.user_ext (id)
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+CREATE INDEX fki_fk_user_file
+    ON public.user_file(id_user);
+
+ALTER TABLE public.user_ext
+    ALTER COLUMN user_name TYPE character(50);
+
+ALTER TABLE public.user_ext
+    ALTER COLUMN pass_word TYPE character(100);
+
+//This table is used to store information about a tuile
+CREATE SEQUENCE tuile_sq;
+CREATE TABLE public.tuile
+(
+    id_tuile integer NOT NULL DEFAULT nextval('tuile_sq'::regclass),
+    lon_min NUMERIC(10,7) NOT NULL,
+    lon_max NUMERIC(10,7) NOT NULL,
+    lat_min NUMERIC(10,7) NOT NULL,
+    lat_max NUMERIC(10,7) NOT NULL,
+    name character(10) NOT NULL,
+    CONSTRAINT pk_tuile PRIMARY KEY (id_tuile)
+);
+
+ALTER TABLE public.tuile
+    OWNER to dtn;
+
+//Sensing date for storing sensing date of each tuile
+CREATE TABLE public.sensing_date
+(
+    date date NOT NULL,
+    id_tuile integer NOT NULL,
+    CONSTRAINT fk_sensing FOREIGN KEY (id_tuile)
+        REFERENCES public.tuile (id_tuile) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE public.sensing_date
+    OWNER to dtn;

@@ -1,0 +1,44 @@
+//Python 3
+1.GDAL
+    sudo add-apt-repository ppa:ubuntugis/ppa
+    sudo apt-get update
+    sudo apt-get install gdal-bin
+    //Check gdal: ogrinfo --version
+2. Matplotlib
+    pip3 install matplotlib
+3. psycopg2 //Pour connecter à la base de données
+    pip3 install psycopg2-binary  
+4. pip3 install sentinelsat
+5. pip3 install rasterio
+6. pip3 install pandas
+//PSQL
+1. sudo apt update
+2. sudo apt install postgresql postgresql-contrib
+3. pgAdmin4
+	sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg 		main" >> /etc/apt/sources.list.d/pgdg.list'
+
+	sudo apt install wget ca-certificates
+
+	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add
+
+	sudo apt update
+
+	sudo apt install pgadmin4
+4. sudo su - postgres
+5. psql -c "alter user postgres with password 'StrongAdminP@ssw0rd'"
+6. Creat data base ter
+	postgres=# \conninfo
+	You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".
+	postgres=# CREATE USER dtn WITH ENCRYPTED PASSWORD 'pwpw';
+	CREATE ROLE
+	postgres=# CREATE DATABASE ter;
+	CREATE DATABASE
+	postgres=# GRANT ALL PRIVILEGES ON DATABASE ter to dtn;
+	GRANT
+7. Install Postgis
+	sudo apt install postgis postgresql-12-postgis-3
+	sudo su - postgres
+	psql
+	"CREATE EXTENSION postgis"
+	"CREATE EXTENSION postgis_raster"
+
