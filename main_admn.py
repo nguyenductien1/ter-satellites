@@ -8,20 +8,20 @@ import TicToc
 # l'administrateur peut telecharger des nouvelles images pour ajouter dans la base de donnee
 # identifiants open access
 user = 'nguyenductien1'
-password = 'Conchocon199@'
+password = 'pwpw'
 
 sensingStartTime = '20210208'
 sensingEndTime = '20210212' # intervalle useful for downloading temporal series
 tile = 'T31TEJ' # enter le nom de la tuile ou des tuiles à télécharger
 tuiles = [tile]
-workdir = '/home/dtn/Documents/ter-python/'
+workdir = '/Users/dtn/Documents/Master-IPS/TER/Final/M1IPS-TER-2021/API/ter-python/'
 
 
 #instance objet tuile
 tuile = Tuile.Tuile(user,password,workdir,sensingStartTime,sensingEndTime,tuiles,'Level-1C')
 
 """ 1. telechargment des images pour objet tuile (une tuile est une collection d'images)"""
-#tuile.download() #ex nom tuile = S2A_MSIL1C_20210327T102021_N0209_R065_T32SLC_20210327T122440
+tuile.download() #ex nom tuile = S2A_MSIL1C_20210327T102021_N0209_R065_T32SLC_20210327T122440
 
 """ 2. creation de la base de donnee locale si voulu """
 #tuile.database()
